@@ -77,7 +77,7 @@ Set-NetFirewallRule -DisplayGroup "File and Printer Sharing" -Profile Private -E
 
 # Get the network profile associated with the adapter and set it to Private
 $netProfile = Get-NetConnectionProfile -InterfaceAlias $aName
-if ($netProfile -ne $null) {
+if ($null -ne $netProfile) {
     Set-NetConnectionProfile -InterfaceAlias $aName -NetworkCategory Private
 }
 

@@ -18,7 +18,7 @@ for ($i = $startNumber; $i -le $endNumber; $i++) {
     $pingResult = Test-Connection -ComputerName $computerName -Count 1 -ErrorAction SilentlyContinue
     $pingResults += [PSCustomObject]@{
         ComputerName = $computerName
-        Online = $pingResult -ne $null
+        Online = $null -ne $pingResult
     }
 }
 
