@@ -1,6 +1,7 @@
 ﻿################################################################################
 # ch3-baseline.ps1
 # v0.1 - 20230903 - intitial version
+# v0.2 - 20230906 - updated variable handling.  added minor debugging.
 #
 # resets various networking components on Windows 10 to a baseline config
 # designed primarily to reset CNT 101 computers prior to doing Ch 3 labs.
