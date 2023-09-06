@@ -1,0 +1,36 @@
+name: Convert PS1 to EXE
+
+on:
+  push:
+    paths:
+      - '**.ps1'
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup PowerShell 5.1
+      uses: actions/setup-powershell@v1
+      with:
+        powershell-version: '5.1.0'
+
+    - name: Install PS2EXE
+      run: Install-Module -Name ps2exe -Force -SkipPublisherCheck -Scope CurrentUser
+
+    - name: Convert PS1 to EXE
+      run: |
+        Import-Module ps2exe
+        Get-ChildItem *.ps1 | ForEach-Object {
+          $exeName = "$($_.BaseName).exe"
+          Invoke-ps2exe -InputFile $_.FullName -OutputFile $exeName -RequireAdmin
+        }
+
+    - name: Upload EXE
+      uses: actions/upload-artifact@v2
+      with:
+        name: exe-files
+        path: ./*.exe
