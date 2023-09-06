@@ -26,7 +26,7 @@ jobs:
         Import-Module ps2exe
         Get-ChildItem *.ps1 | ForEach-Object {
           $exeName = "$($_.BaseName).exe"
-          Invoke-ps2exe -InputFile $_.FullName -OutputFile $exeName -RequireAdmin
+          Invoke-ps2exe -InputFile $_.FullName -OutputFile $exeName
         }
 
     - name: Upload EXE
