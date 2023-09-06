@@ -52,22 +52,28 @@ if (-not $isAdmin) {
     exit 1
 }
 
-# use hard-coded $adapterName if no command line argument present
-$aName = if ($a -ne "") { $a } else { $adapterName }
+# update $adapterName if command line argument present
+if ($a -ne "") {
+    $adapterName = "$a" 
+} 
+
+# DEBUGGING 
+# Write-Host "a = $a"
+# Write-Host "adapter name = $adapterName"
 
 # Check if the adapter exists
 $adapter = Get-NetAdapter | Where-Object { $_.Name -eq $adapterName }
 
 if ($null -eq $adapter) {
-    Write-Host "Error: Adapter '$aName' not found. Exiting script."
+    Write-Host "Error: Adapter '$adapterName' not found. Exiting script."
     exit 1
 }
 
 # Set the interface speed to Auto Negotiation
-Set-NetAdapterAdvancedProperty -Name $aName -DisplayName "Speed & Duplex" -DisplayValue "Auto Negotiation"
+Set-NetAdapterAdvancedProperty -Name $adapterName -DisplayName "Speed & Duplex" -DisplayValue "Auto Negotiation"
 
 # Set IP Configuration to DHCP for adapter
-Set-NetIPInterface -InterfaceAlias $aName -Dhcp Enabled
+Set-NetIPInterface -InterfaceAlias $adapterName -Dhcp Enabled
 
 # Turn off Windows Firewall for all profiles
 Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
@@ -76,9 +82,9 @@ Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
 Set-NetFirewallRule -DisplayGroup "File and Printer Sharing" -Profile Private -Enabled True
 
 # Get the network profile associated with the adapter and set it to Private
-$netProfile = Get-NetConnectionProfile -InterfaceAlias $aName
+$netProfile = Get-NetConnectionProfile -InterfaceAlias $adapterName
 if ($null -ne $netProfile) {
-    Set-NetConnectionProfile -InterfaceAlias $aName -NetworkCategory Private
+    Set-NetConnectionProfile -InterfaceAlias $adapterName -NetworkCategory Private
 }
 
 # Output to confirm changes
