@@ -31,7 +31,7 @@
 # -a <adapter name> : set name of adapter to be modified. (will override 
 #                     $adapterName configured below)
 # -r                : optional flag.  will reboot the comptuer after finishing.  
-#                     Not strictly necessary, but Widnows doesn't do well
+#                     Not strictly necessary, but Windows doesn't do well
 #                     when all these changes are made at once without a reboot
 #                     So it is STRONGLY recommended you reboot the computer
 ################################################################################
@@ -49,7 +49,7 @@ $adapterName = "PC-A"
 $isAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
 
 if (-not $isAdmin) {
-    Write-Host "Error: This script requires administrative privileg. Exiting."
+    Write-Host "Error: This script requires administrative privilege. Exiting."
     exit 1
 }
 
