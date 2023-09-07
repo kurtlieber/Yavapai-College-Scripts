@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - '**.ps1'
+  workflow_dispatch:
 
 jobs:
   build:
