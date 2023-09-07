@@ -17,15 +17,20 @@ jobs:
     - name: Install PS2EXE
       shell: pwsh
       run: |
+        Write-Host "Setting PSGallery as Trusted"
         Set-PSRepository PSGallery -InstallationPolicy Trusted
+        Write-Host "Installing ps2exe module"
         Install-Module -Name ps2exe -Force -SkipPublisherCheck -Scope CurrentUser
 
     - name: Convert PS1 to EXE
       shell: pwsh
       run: |
+        Write-Host "Importing ps2exe module"
         Import-Module ps2exe
+        Write-Host "Converting PS1 files to EXE"
         Get-ChildItem *.ps1 | ForEach-Object {
           $exeName = "$($_.BaseName).exe"
+          Write-Host "Converting $($_.FullName) to $exeName"
           Invoke-ps2exe -InputFile $_.FullName -OutputFile $exeName
         }
 
