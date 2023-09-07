@@ -15,9 +15,12 @@ jobs:
 
     - name: Install PS2EXE
       shell: pwsh
-      run: Install-Module -Name ps2exe -Force -SkipPublisherCheck -Scope CurrentUser
+      run: |
+        Set-PSRepository PSGallery -InstallationPolicy Trusted
+        Install-Module -Name ps2exe -Force -SkipPublisherCheck -Scope CurrentUser
 
     - name: Convert PS1 to EXE
+      shell: pwsh
       run: |
         Import-Module ps2exe
         Get-ChildItem *.ps1 | ForEach-Object {
