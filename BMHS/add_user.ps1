@@ -16,7 +16,7 @@
 $baseName = "BMHS-E200-"
 $startingNumber = 1
 $endingNumber = 1
-$computerNames = 1..$endingNumber | ForEach-Object { "$baseName$('{0:D2}' -f $_)" }
+$computerNames = $startingNumber..$endingNumber | ForEach-Object { "$baseName$('{0:D2}' -f $_)" }
 
 # Prompt for new user details
 $newUserName = Read-Host "Enter the new username"
