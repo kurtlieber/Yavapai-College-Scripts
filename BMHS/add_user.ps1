@@ -5,7 +5,7 @@
 # This is only tested (so far) on BMHS lab computers in E200 
 # 
 # Remote computers must have Powershell remote execution enabled and also allow unencrypted traffic
-# see enable-remoting.bat for examples of how to do this# 
+# see enable-remoting.bat for examples of how to do this
 #                                                      
 # CHANGELOG                                                                                 
 # =========                                                                               
