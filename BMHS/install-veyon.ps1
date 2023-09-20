@@ -1,5 +1,5 @@
-$baseComputerName = "test"
-$source = "\\test-01\scripts`$\"
+$baseComputerName = "BMHS-E200"
+$source = "\\BMHS-YC-instr\scripts`$\"
 $exeFile = $source + "veyon-4.8.2.0-win64-setup.exe"
 $jsonFile = $source + "e200-config.json"
 $pemFile = $source + "administrators_public_key.pem"
